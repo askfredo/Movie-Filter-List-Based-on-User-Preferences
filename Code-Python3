@@ -1,0 +1,45 @@
+# Select Tensor Flow 2
+!pip install -q sklearn
+
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from IPython.display import clear_output
+from six.moves import urllib
+
+
+import tensorflow.compat.v2.feature_column as fc
+
+import tensorflow as tf
+
+# Ask for user preferences
+preferred_director = input("Enter preferred director: ")
+min_imdb_rating = float(input("Enter minimum IMDb rating (e.g., 7.5): "))
+preferred_genre = input("Enter preferred genre (e.g., Action): ")
+
+# Update these variables with the correct column names
+director_column = 'Director'  # Replace 'Director' with the actual column name for directors
+rating_column = 'Rating'  # Replace 'IMDb_rating' with the actual column name for IMDb ratings
+genre_column = 'Genre'        # Replace 'Genre' with the actual column name for genres
+
+# Filter the DataFrame based on these preferences
+filtered_df = df[(df[director_column] == preferred_director) &
+                 (df[rating_column] >= min_imdb_rating) &
+                 (df[genre_column].str.contains(preferred_genre, case=False, na=False))
+]
+
+# Sort the filtered DataFrame by IMDb rating
+recommended_movies = filtered_df.sort_values(by=rating_column, ascending=False)
+
+# Other parts of your code remain the same...
+
+# Display top N recommendations
+N = 5
+print("Top movie recommendations based on your preferences:")
+
+# Iterate over each row in the top N recommendations
+for index, row in recommended_movies.head(N).iterrows():
+    print(f"Movie: {row['Title']}, Director: {row['Director']}, Rating: {row['Rating']}, Genre: {row['Genre']}")
