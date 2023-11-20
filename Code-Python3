@@ -20,11 +20,6 @@ preferred_director = input("Enter preferred director: ")
 min_imdb_rating = float(input("Enter minimum IMDb rating (e.g., 7.5): "))
 preferred_genre = input("Enter preferred genre (e.g., Action): ")
 
-# Update these variables with the correct column names
-director_column = 'Director'  # Replace 'Director' with the actual column name for directors
-rating_column = 'Rating'  # Replace 'IMDb_rating' with the actual column name for IMDb ratings
-genre_column = 'Genre'        # Replace 'Genre' with the actual column name for genres
-
 # Filter the DataFrame based on these preferences
 filtered_df = df[(df[director_column] == preferred_director) &
                  (df[rating_column] >= min_imdb_rating) &
